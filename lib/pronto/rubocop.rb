@@ -2,6 +2,16 @@
 
 require 'pronto'
 require 'rubocop'
+
+# dirty patch
+module RuboCop
+  class Config
+    def base_dir_for_path_parameters
+      ENV.fetch("PRONTO_RUBOCOP_WORKSPACE") { Dir.pwd }
+    end
+  end
+end
+
 require 'pronto/rubocop/patch_cop'
 require 'pronto/rubocop/offense_line'
 
